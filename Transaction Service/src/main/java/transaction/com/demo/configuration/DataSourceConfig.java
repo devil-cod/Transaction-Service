@@ -14,7 +14,7 @@ public class DataSourceConfig {
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/tst_db?useSSL=false&zeroDateTimeBehavior=convertToNull");
         dataSource.setUsername("root");
-        dataSource.setPassword("Paytm@123");
+        dataSource.setPassword("password");//Local db file
         return dataSource;
     }
 }
