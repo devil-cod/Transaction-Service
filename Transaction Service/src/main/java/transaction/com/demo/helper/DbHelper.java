@@ -25,7 +25,6 @@ public class DbHelper {
             transactionAudit.setMoney(transactionRequest.getAmountInInr());
             transactionAudit.setType(transactionRequest.getType());
             transactionAudit.setDate(LocalDateTime.now());
-           // transactionAudit.setCreatedAt(LocalDateTime.now());
             try {
                 requestAuditDao.save(transactionAudit);
             }catch (Exception e)
@@ -41,7 +40,7 @@ public class DbHelper {
         return requestAuditDao.findAll();
     }
 
-    public List<TransactionAudit> getAllTransactionsByDate(LocalDateTime dateString) {
-        return requestAuditDao.findByDate(dateString);
+     public List<TransactionAudit> findAllByDateBetween(LocalDateTime startDate, LocalDateTime endDate){
+        return requestAuditDao.findAllByDateBetween(startDate,endDate);
     }
 }
