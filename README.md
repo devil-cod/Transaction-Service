@@ -4,6 +4,8 @@ To help the kirana store to mentaing their directory
 
 Documentation :
 
+1:Health check api is integrated to check the connection with data base and a data source configuration is also there to set the database driver,username,password in config file.
+
 2 Apis Are integrated with required Authorization (Json Web Authentication )
 
 1: @GET(/api/v1/transaction) Query(optional = true) to Get All the Transaction and filter it by date
