@@ -1,0 +1,77 @@
+# Maven runtime loaded configs
+app.info:
+  name: "@project.name@"
+  version: "@project.version@"
+# Spring config
+spring:
+  application:
+    name: ${app.info.name}
+  profiles:
+    active: local
+  datasource:
+    driverClassName: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/tst_db?useSSL=false&zeroDateTimeBehavior=convertToNull
+    username: ${datasource.username}
+    password: ${datasource.password}
+    hikari:
+      connectionTimeout: 20000
+    jpa:
+      show-sql: true
+      hibernate:
+        ddl-auto: none
+        use-new-id-generator-mappings: false
+        dialect: org.hibernate.dialect.MySQL5Dialect
+        format_sql: true
+  jpa:
+    properties:
+      show-sql: true
+      hibernate:
+        ddl-auto: none
+        jdbc.batch_size: 50
+        order_inserts: true
+  mvc:
+    pathmatch:
+      matching-strategy: ant_path_matcher
+  servlet:
+    multipart:
+      max-file-size: 50MB
+      max-request-size: 50MB
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health,prometheus,metrics,info
+  health:
+    livenessstate:
+      enabled: true
+    readinessstate:
+      enabled: true
+    show-details: always
+  endpoint:
+    health:
+      probes:
+        enabled: true
+
+prometheus:
+  monitor:
+    path: /actuator/prometheus
+    enabled: true
+    additionalLabels:
+      release: prometheus
+
+
+
+jwt_token_validity:
+  ttl:
+    sec: 3600
+
+cipher:
+  algorithm: AES/ECB/PKCS5PADDING
+  key: ${cipherKey}
+currency:
+ url: https://api.fxratesapi.com/latest
+
+jwt:
+ clientId: oereact
+ secret: 4YUVqhMHN40NSbP3tUZpHJ4fQM9Nx7rWpCezsuV32Fo=
