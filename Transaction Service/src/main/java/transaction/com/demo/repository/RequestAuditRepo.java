@@ -12,5 +12,5 @@ import java.util.List;
 @Repository
 public interface RequestAuditRepo extends JpaRepository<TransactionAudit, Long> {
 
-    List<TransactionAudit> findByDate(LocalDateTime date);
+    List<TransactionAudit> findAllByDateBetween(LocalDateTime startDate, LocalDateTime endDate);
 }
