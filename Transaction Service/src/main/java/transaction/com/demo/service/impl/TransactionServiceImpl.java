@@ -26,6 +26,12 @@ import java.time.format.DateTimeFormatter;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.format.DateTimeFormatter;
+import java.util.HashMap;
+import java.util.List;
 
 @Service
 @Setter
@@ -98,9 +104,11 @@ public class TransactionServiceImpl implements TransactionflowService {
     public ApiResponse getTransactionsByDate(String dateString) {
         List<TransactionAudit> getAllTransactions = null;
         if (!StringUtil.isNullOrEmpty(dateString)) {
-            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd", Locale.ENGLISH);
-            LocalDateTime localDateTime = LocalDateTime.parse(dateString, formatter);
-            getAllTransactions = dbHelper.getAllTransactionsByDate(localDateTime);
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
+            LocalDate date = LocalDate.parse(dateString, formatter);
+            LocalDateTime startOfDay = LocalDateTime.of(date, LocalTime.MIN);
+            LocalDateTime endOfDay = LocalDateTime.of(date, LocalTime.MAX);
+            getAllTransactions = dbHelper.findAllByDateBetween(startOfDay,endOfDay);
         } else {
             getAllTransactions = dbHelper.getAllTransactions();
         }
