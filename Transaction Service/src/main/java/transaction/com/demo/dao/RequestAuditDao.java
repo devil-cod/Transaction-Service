@@ -22,8 +22,8 @@ public class RequestAuditDao {
     public List<TransactionAudit> findAll() {
         return requestAuditRepo.findAll();
     }
-    public List<TransactionAudit> findByDate(LocalDateTime date) {
-        return requestAuditRepo.findByDate(date);
+    public List<TransactionAudit> findAllByDateBetween(LocalDateTime startDate, LocalDateTime endDate) {
+        return requestAuditRepo.findAllByDateBetween(startDate,endDate);
     }
 
 }
